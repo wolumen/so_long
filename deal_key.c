@@ -11,57 +11,27 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+void	deal_W(t_game *max);
+void	deal_A(t_game *max);
+void	deal_S(t_game *max);
+void	deal_D(t_game *max);
+
 
 int deal_key(int key, void *param)
 {
 	t_game	*max;
 
 	max = (t_game *)param;
-	// printf("jetzt wird der key ausgegeben:\n");
-	// printf("%d\n", key);
-	// printf("width: %d, higth: %d\n", max->figur.img_width, max->figur.img_height);
-	// mlx_clear_window(max->mlx, max->win);
-	// printf("steps: %d\n", max->figur.steps);
-	// printf("x: %d, y: %d\n", max->figur.x, max->figur.y);
-	if (key == KEY_W)
+	if (next_field_wall(key, max) == FALSE)
 	{
-		if (next_field_wall(key, max) == FALSE)
-		{
-			mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
-			max->figur.y -= max->figur.img_height;
-			mlx_put_image_to_window(max->mlx, max->win, max->figur.img_u, max->figur.x, max->figur.y);
-			max->figur.steps += 1;
-		}
-	}
-	if (key == KEY_S)
-	{
-		if (next_field_wall(key, max) == FALSE)
-		{
-			mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
-			max->figur.y += max->figur.img_height;
-			mlx_put_image_to_window(max->mlx, max->win, max->figur.img_d, max->figur.x, max->figur.y);
-			max->figur.steps += 1;
-		}
-	}
-	if (key == KEY_D)
-	{
-		if (next_field_wall(key, max) == FALSE)
-		{		
-			mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
-			max->figur.x += max->figur.img_width;
-			mlx_put_image_to_window(max->mlx, max->win, max->figur.img_r, max->figur.x, max->figur.y);
-			max->figur.steps += 1;
-		}	
-	}
-	if (key == KEY_A)
-	{
-		if (next_field_wall(key, max) == FALSE)
-		{		
-			mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
-			max->figur.x -= max->figur.img_width;
-			mlx_put_image_to_window(max->mlx, max->win, max->figur.img_l, max->figur.x, max->figur.y);
-			max->figur.steps += 1;
-		}	
+		if (key == KEY_W)
+			deal_W(max);
+		if (key == KEY_S)
+			deal_S(max);
+		if (key == KEY_D)
+			deal_D(max);
+		if (key == KEY_A)
+			deal_A(max);
 	}
 	if (key == KEY_ESC)
 	{
@@ -69,4 +39,36 @@ int deal_key(int key, void *param)
 		exit (0);
 	}
 	return (0);
+}
+
+void	deal_W(t_game *max)
+{
+	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
+	max->figur.y -= max->figur.img_height;
+	mlx_put_image_to_window(max->mlx, max->win, max->figur.img_u, max->figur.x, max->figur.y);
+	max->figur.steps += 1;
+}
+
+void	deal_A(t_game *max)
+{
+	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
+	max->figur.x -= max->figur.img_width;
+	mlx_put_image_to_window(max->mlx, max->win, max->figur.img_l, max->figur.x, max->figur.y);
+	max->figur.steps += 1;
+}
+
+void	deal_S(t_game *max)
+{
+	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
+	max->figur.y += max->figur.img_height;
+	mlx_put_image_to_window(max->mlx, max->win, max->figur.img_d, max->figur.x, max->figur.y);
+	max->figur.steps += 1;
+}
+
+void	deal_D(t_game *max)
+{
+	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
+	max->figur.x += max->figur.img_width;
+	mlx_put_image_to_window(max->mlx, max->win, max->figur.img_r, max->figur.x, max->figur.y);
+	max->figur.steps += 1;	
 }

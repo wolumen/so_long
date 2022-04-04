@@ -12,17 +12,14 @@
 
 #include "so_long.h"
 
-int	next_field_wall(int key, t_game *max)
+char	next_field(int key, t_game *max)
 {
-	int m;
-	int	n;
+	char	field;
+	int		m;
+	int		n;
 
 	m = max->figur.y / max->figur.img_width;
 	n = max->figur.x / max->figur.img_height;
-
-	printf("max x: %d, max y: %d, m: %d, n: %d\n", max->figur.x, max->figur.y, m, n);
-	printf("map Spieler: %c\n", max->map.map_arr[m][n]);
-
 	if (key == KEY_W)
 		m = m - 1;
 	if (key == KEY_S)
@@ -31,11 +28,21 @@ int	next_field_wall(int key, t_game *max)
 		n = n + 1;
 	if (key == KEY_A)
 		n = n - 1;
-	printf("m next: %d, n next: %d\n", m, n);
-	printf("map Next: %c\n", max->map.map_arr[m][n]);
-	
-	if (max->map.map_arr[m][n] == WALL)
+	field = max->map.map_arr[m][n];
+	return (field);
+}
+
+int	next_field_wall(int key, t_game *max)
+{
+	char field;
+
+	printf("collectibles amount: %d\n", max->map.collectible_count);
+
+	field = next_field(key, max);
+	if (field == WALL)
 		return (TRUE);
 	else
 		return (FALSE);
 }
+
+// int next_field_collectible
