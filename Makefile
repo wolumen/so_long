@@ -18,7 +18,7 @@ SRC		=	max_the_game.c \
 			init_map.c \
 			init_img.c \
 			set_map.c \
-			# moves_dependences.c
+			moves_dependences.c
 
 OBJ		=	$(SRC:%.c=%.o)
 

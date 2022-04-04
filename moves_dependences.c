@@ -17,20 +17,23 @@ int	next_field_wall(int key, t_game *max)
 	int m;
 	int	n;
 
-	m = (max->figur.x / max->figur.img_width) + 1;
-	n = (max->figur.y / max->figur.img_height + 1);
+	m = max->figur.y / max->figur.img_width;
+	n = max->figur.x / max->figur.img_height;
 
 	printf("max x: %d, max y: %d, m: %d, n: %d\n", max->figur.x, max->figur.y, m, n);
-	printf("map: %c\n", max->map.map_arr[m][n]);
+	printf("map Spieler: %c\n", max->map.map_arr[m][n]);
 
 	if (key == KEY_W)
-		n = n - 1;
-	if (key == KEY_S)
-		n = n + 1;
-	if (key == KEY_D)
-		m = m + 1;
-	if (key == KEY_A)
 		m = m - 1;
+	if (key == KEY_S)
+		m = m + 1;
+	if (key == KEY_D)
+		n = n + 1;
+	if (key == KEY_A)
+		n = n - 1;
+	printf("m next: %d, n next: %d\n", m, n);
+	printf("map Next: %c\n", max->map.map_arr[m][n]);
+	
 	if (max->map.map_arr[m][n] == WALL)
 		return (TRUE);
 	else

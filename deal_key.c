@@ -25,31 +25,43 @@ int deal_key(int key, void *param)
 	// printf("x: %d, y: %d\n", max->figur.x, max->figur.y);
 	if (key == KEY_W)
 	{
-		mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
-		max->figur.y -= max->figur.img_height;
-		mlx_put_image_to_window(max->mlx, max->win, max->figur.img_u, max->figur.x, max->figur.y);
-		max->figur.steps += 1;
+		if (next_field_wall(key, max) == FALSE)
+		{
+			mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
+			max->figur.y -= max->figur.img_height;
+			mlx_put_image_to_window(max->mlx, max->win, max->figur.img_u, max->figur.x, max->figur.y);
+			max->figur.steps += 1;
+		}
 	}
 	if (key == KEY_S)
 	{
-		mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
-		max->figur.y += max->figur.img_height;
-		mlx_put_image_to_window(max->mlx, max->win, max->figur.img_d, max->figur.x, max->figur.y);
-		max->figur.steps += 1;
+		if (next_field_wall(key, max) == FALSE)
+		{
+			mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
+			max->figur.y += max->figur.img_height;
+			mlx_put_image_to_window(max->mlx, max->win, max->figur.img_d, max->figur.x, max->figur.y);
+			max->figur.steps += 1;
+		}
 	}
 	if (key == KEY_D)
 	{
-		mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
-		max->figur.x += max->figur.img_width;
-		mlx_put_image_to_window(max->mlx, max->win, max->figur.img_r, max->figur.x, max->figur.y);
-		max->figur.steps += 1;
+		if (next_field_wall(key, max) == FALSE)
+		{		
+			mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
+			max->figur.x += max->figur.img_width;
+			mlx_put_image_to_window(max->mlx, max->win, max->figur.img_r, max->figur.x, max->figur.y);
+			max->figur.steps += 1;
+		}	
 	}
 	if (key == KEY_A)
 	{
-		mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
-		max->figur.x -= max->figur.img_width;
-		mlx_put_image_to_window(max->mlx, max->win, max->figur.img_l, max->figur.x, max->figur.y);
-		max->figur.steps += 1;
+		if (next_field_wall(key, max) == FALSE)
+		{		
+			mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
+			max->figur.x -= max->figur.img_width;
+			mlx_put_image_to_window(max->mlx, max->win, max->figur.img_l, max->figur.x, max->figur.y);
+			max->figur.steps += 1;
+		}	
 	}
 	if (key == KEY_ESC)
 	{

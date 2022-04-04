@@ -19,8 +19,8 @@
 # define WINDOW_WIDTH	(max.map.cols * max.world.world_width)			// pixel
 # define WINDOW_HEIGHT	(max.map.rows * max.world.world_height)
 
-// # define TRUE		1
-// # define FALSE		0
+# define TRUE		1
+# define FALSE		0
 
 
 typedef struct	s_map
