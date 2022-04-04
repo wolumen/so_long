@@ -36,8 +36,6 @@ int	next_field_wall(int key, t_game *max)
 {
 	char field;
 
-	printf("collectibles amount: %d\n", max->map.collectible_count);
-
 	field = next_field(key, max);
 	if (field == WALL)
 		return (TRUE);
@@ -45,4 +43,12 @@ int	next_field_wall(int key, t_game *max)
 		return (FALSE);
 }
 
-// int next_field_collectible
+void next_field_collectible(t_game *max)
+{
+	max->figur.collectible_found += 1;
+
+	if (max->figur.collectible_found == max->map.collectible_count)
+	{
+		mlx_put_image_to_window(max->mlx, max->win, max->world.exit, max->map.exit_x, max->map.exit_y);
+	}
+}

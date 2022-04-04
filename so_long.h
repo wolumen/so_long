@@ -74,5 +74,7 @@ void	init_map(t_game *max, char **argv);
 void	init_images(t_game *max);
 void	set_map(t_game *max);
 int		next_field_wall(int key, t_game *max);
-
+char	next_field(int key, t_game *max);
+void	next_field_collectible(t_game *max);
+void	ft_exit(t_game *max);
 

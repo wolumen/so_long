@@ -25,7 +25,7 @@ void	set_map(t_game *max)
 		{			
 			if (max->map.map_arr[i][j] == WALL)
 				mlx_put_image_to_window(max->mlx, max->win, max->world.wall, (max->world.world_width * j), (max->world.world_height * i));
-			else if (max->map.map_arr[i][j] == BACKGROUND)
+			else if (max->map.map_arr[i][j] == BACKGROUND || max->map.map_arr[i][j] == EXIT)
 				mlx_put_image_to_window(max->mlx, max->win, max->world.background, (max->world.world_width * j), (max->world.world_height * i));
 			else if (max->map.map_arr[i][j] == COLLECTIBLE)
 			{	

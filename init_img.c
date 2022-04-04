@@ -18,8 +18,8 @@ void init_images(t_game *max)
 	max->figur.img_u = mlx_xpm_file_to_image(max->mlx, "./img/bun_up.xpm", &max->figur.img_width, &max->figur.img_height);
 	max->figur.img_l = mlx_xpm_file_to_image(max->mlx, "./img/bun_left.xpm", &max->figur.img_width, &max->figur.img_height);
 	max->figur.img_r = mlx_xpm_file_to_image(max->mlx, "./img/bun_right.xpm", &max->figur.img_width, &max->figur.img_height);
-	max->world.background = mlx_xpm_file_to_image(max->mlx, "./img/background.xpm", &max->world.world_width, &max->world.world_height);
 	max->world.wall = mlx_xpm_file_to_image(max->mlx, "./img/tree_b.xpm", &max->world.world_width, &max->world.world_height);
+	max->world.exit = mlx_xpm_file_to_image(max->mlx, "./img/exit_b.xpm", &max->world.world_width, &max->world.world_height);
+	max->world.background = mlx_xpm_file_to_image(max->mlx, "./img/background.xpm", &max->world.world_width, &max->world.world_height);
 	max->world.collectible = mlx_xpm_file_to_image(max->mlx, "./img/carrot2_b.xpm", &max->world.world_width, &max->world.world_height);
-	// max->world.exit = mlx_xpm_file_to_image(max->mlx, "./img/exit_b.xpm", &max->world.world_width, &max->world.world_height);
 }

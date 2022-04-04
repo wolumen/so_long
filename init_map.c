@@ -17,13 +17,20 @@
 #include <fcntl.h>			// für open
 
 
+
+void	init_collectible(t_game *max, int i, int j)
+{
+	max->figur.collectible_found = 0;
+	max->map.exit_x = j * max->world.world_height;
+	max->map.exit_y = i * max->world.world_width;
+}
+
 void	fill_array(int file, t_game *max)
 {
 	char	sign;
 	int		bytes;
 	int		i;
 	int		j;
-	printf("in fill_array0\n");
 
 	i = 0;
 	j = 0;
@@ -32,6 +39,8 @@ void	fill_array(int file, t_game *max)
 		if (sign != '\n')
 		{	
 			max->map.map_arr[i][j] = sign;
+			if (sign == 'E')
+				init_collectible(max, i, j);
 			j++;
 		}
 		else
@@ -40,7 +49,6 @@ void	fill_array(int file, t_game *max)
 			j = 0;
 		}
 	}
-	printf("in fill_array1\n");
 }
 
 void allocate_array(t_game *max)
@@ -50,7 +58,6 @@ void allocate_array(t_game *max)
 	max->map.map_arr = malloc(sizeof(char*) * max->map.rows);
 	if (!max->map.map_arr)
 		exit (-1);
-	printf("in allocate_array1\n");
 	i = 0;
 	while (i < max->map.rows)
 	{
@@ -59,7 +66,6 @@ void allocate_array(t_game *max)
 			exit (-1);
 		i++;
 	}
-	printf("in allocate_array2\n");
 }
 
 void init_map(t_game *max, char **argv)
@@ -105,3 +111,4 @@ void init_map(t_game *max, char **argv)
         printf("\n");
     }
 }
+

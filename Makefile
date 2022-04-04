@@ -18,7 +18,8 @@ SRC		=	max_the_game.c \
 			init_map.c \
 			init_img.c \
 			set_map.c \
-			moves_dependences.c
+			move_dependences.c \
+			exit.c
 
 OBJ		=	$(SRC:%.c=%.o)
 
@@ -29,6 +30,10 @@ CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -g
 
 MLX_FLAGS =	-lX11 -lXext -lm
+
+VAL			:= valgrind
+VAL_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes
+--log-file=valgrind-out.txt
 
 
 
@@ -61,3 +66,12 @@ test1: all
 
 test2: all
 	./$(NAME) ./maps/map2.ber
+
+test3: all
+	./$(NAME) ./maps/map_large.ber
+
+memcheck1: all
+	$(VAL) $(VAL_FLAGS) ./$(NAME) ./maps/map1.ber
+
+memcheck2: all
+	$(VAL) $(VAL_FLAGS) ./$(NAME) ./maps/map2.ber
