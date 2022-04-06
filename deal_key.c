@@ -11,16 +11,16 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-void	deal_W(t_game *max);
-void	deal_A(t_game *max);
-void	deal_S(t_game *max);
-void	deal_D(t_game *max);
+
+void	deal_w(t_game *max);
+void	deal_a(t_game *max);
+void	deal_s(t_game *max);
+void	deal_d(t_game *max);
 
 
-int deal_key(int key, void *param)
+int	deal_key(int key, void *param)
 {
 	t_game	*max;
-
 
 	max = (t_game *)param;
 
@@ -30,13 +30,13 @@ int deal_key(int key, void *param)
 	if (next_field_wall(key, max) == FALSE)
 	{
 		if (key == KEY_W)
-			deal_W(max);
+			deal_w(max);
 		if (key == KEY_S)
-			deal_S(max);
+			deal_s(max);
 		if (key == KEY_D)
-			deal_D(max);
+			deal_d(max);
 		if (key == KEY_A)
-			deal_A(max);
+			deal_a(max);
 	}
 	if (key == KEY_ESC)
 	{
@@ -46,7 +46,7 @@ int deal_key(int key, void *param)
 	return (0);
 }
 
-void	deal_W(t_game *max)
+void	deal_w(t_game *max)
 {
 	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
 	max->figur.y -= max->figur.img_height;
@@ -59,7 +59,7 @@ void	deal_W(t_game *max)
 	}
 }
 
-void	deal_A(t_game *max)
+void	deal_a(t_game *max)
 {
 	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
 	max->figur.x -= max->figur.img_width;
@@ -72,7 +72,7 @@ void	deal_A(t_game *max)
 	}
 }
 
-void	deal_S(t_game *max)
+void	deal_s(t_game *max)
 {
 	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
 	max->figur.y += max->figur.img_height;
@@ -85,7 +85,7 @@ void	deal_S(t_game *max)
 	}	
 }
 
-void	deal_D(t_game *max)
+void	deal_d(t_game *max)
 {
 	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
 	max->figur.x += max->figur.img_width;

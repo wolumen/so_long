@@ -32,8 +32,7 @@ CFLAGS	=	-Wall -Wextra -Werror -g
 MLX_FLAGS =	-lX11 -lXext -lm
 
 VAL			:= valgrind
-VAL_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes
---log-file=valgrind-out.txt
+VAL_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt
 
 
 

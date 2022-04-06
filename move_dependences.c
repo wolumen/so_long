@@ -34,7 +34,7 @@ char	next_field(int key, t_game *max)
 
 int	next_field_wall(int key, t_game *max)
 {
-	char field;
+	char	field;
 
 	field = next_field(key, max);
 	if (field == WALL)
@@ -43,7 +43,7 @@ int	next_field_wall(int key, t_game *max)
 		return (FALSE);
 }
 
-void next_field_collectible(t_game *max)
+void	next_field_collectible(t_game *max)
 {
 	max->figur.collectible_found += 1;
 

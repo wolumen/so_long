@@ -1,13 +1,28 @@
-#include <mlx.h>
-#include <stdio.h>			// printf
-#include <unistd.h>
-#include <stdlib.h>			// exit
-#include <fcntl.h>			// für open
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpreissn <jpreissn@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/06 11:27:47 by jpreissn          #+#    #+#             */
+/*   Updated: 2022/04/06 11:27:47 by jpreissn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# define KEY_W 		119
+#ifndef SO_LONG_H
+# define SO_LONG_H
+
+# include <mlx.h>
+# include <stdio.h>			// printf
+# include <unistd.h>
+# include <stdlib.h>		// exit
+# include <fcntl.h>			// für open
+
+# define KEY_W		119
 # define KEY_S		115
-# define KEY_A 		97
-# define KEY_D 		100
+# define KEY_A		97
+# define KEY_D		100
 # define KEY_ESC	65307
 
 # define WALL			'1'
@@ -16,14 +31,13 @@
 # define PLAYER			'P'
 # define EXIT			'E'
 
-# define WINDOW_WIDTH	(max.map.cols * max.world.world_width)			// pixel
+# define WINDOW_WIDTH	(max.map.cols * max.world.world_width)			// pixel STEFFEN must only define constants...
 # define WINDOW_HEIGHT	(max.map.rows * max.world.world_height)
 
 # define TRUE		1
 # define FALSE		0
 
-
-typedef struct	s_map
+typedef struct s_map
 {
 	char		**map_arr;
 	int			rows;
@@ -33,8 +47,7 @@ typedef struct	s_map
 	int			exit_y;
 }	t_map;
 
-
-typedef struct	s_player
+typedef struct s_player
 {
 	void		*img_d;
 	void		*img_u;
@@ -44,11 +57,11 @@ typedef struct	s_player
 	int			y;
 	int			img_width;
 	int			img_height;
-	int 		steps;
+	int			steps;
 	int			collectible_found;
 }	t_player;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void		*background;
 	void		*wall;
@@ -58,7 +71,7 @@ typedef struct	s_img
 	int			world_height;
 }	t_img;
 
-typedef struct	s_game
+typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
@@ -66,8 +79,6 @@ typedef struct	s_game
 	t_img		world;
 	t_map		map;
 }	t_game;
-
-
 
 int		deal_key(int key, void *param);
 void	init_map(t_game *max, char **argv);
@@ -78,3 +89,4 @@ char	next_field(int key, t_game *max);
 void	next_field_collectible(t_game *max);
 void	ft_exit(t_game *max);
 
+#endif
