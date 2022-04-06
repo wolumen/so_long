@@ -21,9 +21,7 @@ int	main(int argc, char **argv)
 		exit (-8);
 
 	init(&max, argv);
-
-	// printf("nach init map\n");
-	// printf("window width: %d, window height: %d\n", WINDOW_WIDTH, WINDOW_HEIGHT);
+	// printf("nach init\n");
 
 	max.win = mlx_new_window(max.mlx, max.win_width, max.win_height, "Spielewiese");
 	// printf("aus dem Fenster\n");
@@ -33,7 +31,6 @@ int	main(int argc, char **argv)
 
 	// mlx_key_hook(max.win, deal_key, &max);
 	mlx_hook(max.win, 2, 1L << 0, deal_key, &max);
-	// printf("carrots: %d\n", max.map.collectible_count);
 
 	mlx_loop(max.mlx);
 

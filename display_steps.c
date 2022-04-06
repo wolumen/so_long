@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   display_steps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpreissn <jpreissn@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 15:23:09 by jpreissn          #+#    #+#             */
-/*   Updated: 2022/04/04 15:23:09 by jpreissn         ###   ########.fr       */
+/*   Created: 2022/04/06 17:45:51 by jpreissn          #+#    #+#             */
+/*   Updated: 2022/04/06 17:45:51 by jpreissn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_exit(t_game *max)
+void	display_steps(t_game *max)
 {
-	int	i;
-
-	i = 0;
-	while (i < max->map.rows)
-	{
-		if (max->map.map_arr[i])
-			free(max->map.map_arr[i]);
-		i++;
-	}
-	free(max->map.map_arr);
-	
-	mlx_destroy_window(max->mlx, max->win);		//TODO in ft exit
-
-
-	exit (EXIT_SUCCESS);
+	max->figur.steps += 1;
+	write(1, "moves: ", 7);
+	ft_putnbr_fd(max->figur.steps, 1);
+	write(1, "\n", 1);
 }

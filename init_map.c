@@ -110,10 +110,10 @@ void	init_map(t_game *max, char **argv)
 	close(file);
 
 	// int i, j;
-    // for (i = 0; i < max->map.rows; i++) 
-	// {
-    //     for (j = 0; j < max->map.cols; j++) 
-    //         printf("%c ", max->map.map_arr[i][j]);
-    //     printf("\n");
-    // }
+	// for (i = 0; i < max->map.rows; i++) 
+	// 	{
+	// 	for (j = 0; j < max->map.cols; j++) 
+	// 		printf("%c ", max->map.map_arr[i][j]);
+	// 	printf("\n");
+	// }
 }

@@ -19,7 +19,8 @@ SRC		=	max_the_game.c \
 			init.c \
 			set_map.c \
 			move_dependences.c \
-			exit.c
+			display_steps.c \
+			exit.c 
 
 OBJ		=	$(SRC:%.c=%.o)
 

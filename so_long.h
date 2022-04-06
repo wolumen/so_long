@@ -83,15 +83,19 @@ int		deal_key(int key, void *param);
 
 // initalize
 void	init(t_game *max, char **argv);
+void	init_player(t_game *max);
+void	init_window(t_game *max);
 void	init_map(t_game *max, char **argv);
 void	init_images(t_game *max);
 void	set_map(t_game *max);
 
 // moves
-int		next_field_wall(int key, t_game *max);
 char	next_field(int key, t_game *max);
 char	current_field(t_game *max);
+int		next_field_wall(int key, t_game *max);
 void	collect_collectible(t_game *max);
+void	display_steps(t_game *max);
+void	ft_putnbr_fd(int n, int fd);
 void	win(t_game *max);
 
 // clean up

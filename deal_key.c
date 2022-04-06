@@ -23,7 +23,7 @@ int	deal_key(int key, void *param)
 	t_game	*max;
 
 	max = (t_game *)param;
-	
+
 	if (next_field_wall(key, max) == FALSE)
 	{
 		if (key == KEY_W)
@@ -37,7 +37,6 @@ int	deal_key(int key, void *param)
 	}
 	if (key == KEY_ESC)
 	{
-		mlx_destroy_window(max->mlx, max->win);
 		ft_exit(max);
 	}
 	return (0);
@@ -48,7 +47,7 @@ void	deal_w(t_game *max)
 	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
 	max->figur.y -= max->figur.img_height;
 	mlx_put_image_to_window(max->mlx, max->win, max->figur.img_u, max->figur.x, max->figur.y);
-	max->figur.steps += 1;
+	display_steps(max);
 	if (current_field(max) == 'C')
 		collect_collectible(max);
 	win(max);
@@ -59,7 +58,7 @@ void	deal_a(t_game *max)
 	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
 	max->figur.x -= max->figur.img_width;
 	mlx_put_image_to_window(max->mlx, max->win, max->figur.img_l, max->figur.x, max->figur.y);
-	max->figur.steps += 1;
+	display_steps(max);
 	if (current_field(max) == 'C')
 		collect_collectible(max);
 	win(max);
@@ -70,7 +69,7 @@ void	deal_s(t_game *max)
 	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
 	max->figur.y += max->figur.img_height;
 	mlx_put_image_to_window(max->mlx, max->win, max->figur.img_d, max->figur.x, max->figur.y);
-	max->figur.steps += 1;
+	display_steps(max);
 	if (current_field(max) == 'C')
 		collect_collectible(max);
 	win(max);
@@ -81,7 +80,7 @@ void	deal_d(t_game *max)
 	mlx_put_image_to_window(max->mlx, max->win, max->world.background, max->figur.x, max->figur.y);
 	max->figur.x += max->figur.img_width;
 	mlx_put_image_to_window(max->mlx, max->win, max->figur.img_r, max->figur.x, max->figur.y);
-	max->figur.steps += 1;	
+	display_steps(max);	
 	if (current_field(max) == 'C')
 		collect_collectible(max);
 	win(max);
