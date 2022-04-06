@@ -88,6 +88,8 @@ void	init_images(t_game *max);
 void	set_map(t_game *max);
 
 // moves
+void	direction(int key, t_game *max);
+void	move(int key, t_game *max);
 char	next_field(int key, t_game *max);
 char	current_field(t_game *max);
 int		next_field_wall(int key, t_game *max);
