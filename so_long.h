@@ -75,18 +75,28 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	int			win_width;
+	int			win_height;
 	t_player	figur;
 	t_img		world;
 	t_map		map;
 }	t_game;
 
 int		deal_key(int key, void *param);
+
+// initalize
 void	init_map(t_game *max, char **argv);
 void	init_images(t_game *max);
 void	set_map(t_game *max);
+
+// moves
 int		next_field_wall(int key, t_game *max);
 char	next_field(int key, t_game *max);
-void	next_field_collectible(t_game *max);
+char	current_field(t_game *max);
+void	collect_collectible(t_game *max);
+void	win(t_game *max);
+
+// clean up
 void	ft_exit(t_game *max);
 
 #endif
