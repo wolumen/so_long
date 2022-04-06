@@ -79,8 +79,6 @@ typedef struct s_game
 	t_map		map;
 }	t_game;
 
-int		deal_key(int key, void *param);
-
 // initalize
 void	init(t_game *max, char **argv);
 void	init_player(t_game *max);
@@ -98,8 +96,12 @@ void	display_steps(t_game *max);
 void	ft_putnbr_fd(int n, int fd);
 void	win(t_game *max);
 
+// hooks
+int		deal_key(int key, void *param);
+int		deal_mouse(int button,int x,int y,void *param);
+
 // clean up
-void	ft_exit(t_game *max);
+int		ft_exit(t_game *max);
 void	free_map_array(t_game *max);
 void	free_images(t_game *max);
 

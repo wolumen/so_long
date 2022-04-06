@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	ft_exit(t_game *max)
+int	ft_exit(t_game *max)
 {
 	if (max->map.map_arr)
 		free_map_array(max);

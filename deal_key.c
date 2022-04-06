@@ -83,3 +83,12 @@ void	deal_d(t_game *max)
 		collect_collectible(max);
 	win(max);
 }
+
+// int	deal_mouse(int button, int x, int y, void *param)
+// {
+// 	t_game	*max;
+
+// 	max = (t_game *)param;
+
+	
+// }

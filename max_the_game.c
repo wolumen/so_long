@@ -30,8 +30,8 @@ int	main(int argc, char **argv)
 	// printf("aus der map\n");
 
 	// mlx_key_hook(max.win, deal_key, &max);
-	mlx_hook(max.win, 2, 1L << 0, deal_key, &max);
-	// mlx_hook(win, ClientMessage, StructureNotifyMask, ft_exit, &max);
+	mlx_hook(max.win, 2, 1L << 0, deal_key, &max);				// 2  KeyPress				(1L<<0)	KeyPressMask
+	mlx_hook(max.win, 17, 1L << 2, ft_exit, &max);				// 17 on Destroy - red X	(1L<<2)	ButtonPressMask
 
 	mlx_loop(max.mlx);
 
