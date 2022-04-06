@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	// printf("nach init map\n");
 	// printf("window width: %d, window height: %d\n", WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	max.win = mlx_new_window(max.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Spielewiese");
+	max.win = mlx_new_window(max.mlx, max.win_width, max.win_height, "Spielewiese");
 	// printf("aus dem Fenster\n");
 
 	set_map(&max);

@@ -31,9 +31,6 @@
 # define PLAYER			'P'
 # define EXIT			'E'
 
-# define WINDOW_WIDTH	(max.map.cols * max.world.world_width)			// pixel STEFFEN must only define constants...
-# define WINDOW_HEIGHT	(max.map.rows * max.world.world_height)
-
 # define TRUE		1
 # define FALSE		0
 

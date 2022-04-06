@@ -40,7 +40,7 @@ void	init(t_game *max, char **argv)
 {
 	max->mlx = mlx_init();
 	init_player(max);
-	init_window(max);
 	init_images(max);
 	init_map(max, argv);
+	init_window(max);
 }
