@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void init_images(t_game *max)
+void	init_images(t_game *max)
 {
 	max->figur.img_d = mlx_xpm_file_to_image(max->mlx, "./img/bun_down.xpm", &max->figur.img_width, &max->figur.img_height);
 	max->figur.img_u = mlx_xpm_file_to_image(max->mlx, "./img/bun_up.xpm", &max->figur.img_width, &max->figur.img_height);
@@ -22,4 +22,25 @@ void init_images(t_game *max)
 	max->world.exit = mlx_xpm_file_to_image(max->mlx, "./img/exit_b.xpm", &max->world.world_width, &max->world.world_height);
 	max->world.background = mlx_xpm_file_to_image(max->mlx, "./img/background.xpm", &max->world.world_width, &max->world.world_height);
 	max->world.collectible = mlx_xpm_file_to_image(max->mlx, "./img/carrot2_b.xpm", &max->world.world_width, &max->world.world_height);
+}
+
+void	init_window(t_game *max)
+{
+	max->win_width = max->map.cols * max->world.world_width;
+	max->win_height = max->map.rows * max->world.world_height;
+}
+void	init_player(t_game *max)
+{
+	max->figur.steps = 0;
+	max->figur.x = 0;
+	max->figur.y = 0;
+}
+
+void	init(t_game *max, char **argv)
+{
+	max->mlx = mlx_init();
+	init_player(max);
+	init_window(max);
+	init_images(max);
+	init_map(max, argv);
 }

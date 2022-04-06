@@ -16,7 +16,7 @@ NAME	=	so_long
 SRC		=	max_the_game.c \
 			deal_key.c \
 			init_map.c \
-			init_img.c \
+			init.c \
 			set_map.c \
 			move_dependences.c \
 			exit.c

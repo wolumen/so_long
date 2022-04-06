@@ -20,13 +20,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		exit (-8);
 
-	max.mlx = mlx_init();
-	max.figur.steps = 0;
-	max.figur.x = 0;
-	max.figur.y = 0;
-
-	init_images(&max);
-	init_map(&max, argv);
+	init(&max, argv);
 
 	// printf("nach init map\n");
 	// printf("window width: %d, window height: %d\n", WINDOW_WIDTH, WINDOW_HEIGHT);

@@ -85,6 +85,7 @@ typedef struct s_game
 int		deal_key(int key, void *param);
 
 // initalize
+void	init(t_game *max, char **argv);
 void	init_map(t_game *max, char **argv);
 void	init_images(t_game *max);
 void	set_map(t_game *max);

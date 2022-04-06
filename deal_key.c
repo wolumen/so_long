@@ -23,9 +23,6 @@ int	deal_key(int key, void *param)
 	t_game	*max;
 
 	max = (t_game *)param;
-
-	// if (next_field(key, max) == 'C')
-	// 	next_field_collectible(max);
 	
 	if (next_field_wall(key, max) == FALSE)
 	{

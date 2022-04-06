@@ -18,6 +18,7 @@
 
 void	init_collectible(t_game *max, int i, int j)
 {
+	max->map.collectible_count = 0;
 	max->figur.collectible_found = 0;
 	max->map.exit_x = j * max->world.world_height;
 	max->map.exit_y = i * max->world.world_width;

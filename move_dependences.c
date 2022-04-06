@@ -65,7 +65,7 @@ void collect_collectible(t_game *max)
 		mlx_put_image_to_window(max->mlx, max->win, max->world.exit, max->map.exit_x, max->map.exit_y);
 	}
 	printf("c found: %d\n", max->figur.collectible_found);
-	printf("c cound: %d\n", max->map.collectible_count);
+	printf("c count: %d\n", max->map.collectible_count);
 }
 
 int	next_field_wall(int key, t_game *max)
