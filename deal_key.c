@@ -36,9 +36,7 @@ int	deal_key(int key, void *param)
 			deal_a(max);
 	}
 	if (key == KEY_ESC)
-	{
 		ft_exit(max);
-	}
 	return (0);
 }
 

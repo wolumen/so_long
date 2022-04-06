@@ -15,7 +15,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_game	max;
+	t_game	max;												// die erste t_game Variable darf kein Pointer sein (no *max)
 
 	if (argc < 2)
 		exit (-8);
@@ -31,6 +31,7 @@ int	main(int argc, char **argv)
 
 	// mlx_key_hook(max.win, deal_key, &max);
 	mlx_hook(max.win, 2, 1L << 0, deal_key, &max);
+	// mlx_hook(win, ClientMessage, StructureNotifyMask, ft_exit, &max);
 
 	mlx_loop(max.mlx);
 

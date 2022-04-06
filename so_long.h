@@ -100,5 +100,8 @@ void	win(t_game *max);
 
 // clean up
 void	ft_exit(t_game *max);
+void	free_map_array(t_game *max);
+void	free_images(t_game *max);
+
 
 #endif

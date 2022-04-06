@@ -39,6 +39,7 @@ void	init_player(t_game *max)
 void	init(t_game *max, char **argv)
 {
 	max->mlx = mlx_init();
+	max->map.map_arr = NULL;
 	init_player(max);
 	init_images(max);
 	init_map(max, argv);
