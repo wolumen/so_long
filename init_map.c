@@ -16,7 +16,7 @@
 #include <stdlib.h>			// exit
 #include <fcntl.h>			// für open
 
-void	init_collectible(t_game *max, int i, int j)
+void	init_exit(t_game *max, int i, int j)
 {
 	max->map.collectible_count = 0;
 	max->figur.collectible_found = 0;
@@ -39,8 +39,8 @@ void	fill_array(int file, t_game *max)
 		if (sign != '\n')
 		{	
 			max->map.map_arr[i][j] = sign;
-			if (sign == 'E')
-				init_collectible(max, i, j);
+			if (sign == EXIT)
+				init_exit(max, i, j);
 			j++;
 		}
 		else

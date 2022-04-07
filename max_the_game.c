@@ -17,14 +17,21 @@ int	main(int argc, char **argv)
 {
 	t_game	max;												// die erste t_game Variable darf kein Pointer sein (no *max)
 
+	// TODO check arguments and file
 	if (argc < 2)
 		exit (-8);
 
 	init(&max, argv);
 	// printf("nach init\n");
 
+
+
+
 	max.win = mlx_new_window(max.mlx, max.win_width, max.win_height, "Spielewiese");
 	// printf("aus dem Fenster\n");
+
+	check_errors(&max);
+
 
 	set_map(&max);
 	// printf("aus der map\n");

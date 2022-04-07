@@ -19,11 +19,11 @@
 # include <stdlib.h>		// exit
 # include <fcntl.h>			// für open
 
-# define KEY_W		119
-# define KEY_S		115
-# define KEY_A		97
-# define KEY_D		100
-# define KEY_ESC	65307
+# define KEY_W			119
+# define KEY_S			115
+# define KEY_A			97
+# define KEY_D			100
+# define KEY_ESC		65307
 
 # define WALL			'1'
 # define BACKGROUND		'0'
@@ -31,8 +31,14 @@
 # define PLAYER			'P'
 # define EXIT			'E'
 
-# define TRUE		1
-# define FALSE		0
+# define SIGNS			"10CPE"
+
+# define TRUE			1
+# define FALSE			0
+
+# define WHITE			"\033[0m"
+# define RED			"\033[31m"
+# define YEL			"\x1B[33m"
 
 typedef struct s_map
 {
@@ -43,6 +49,17 @@ typedef struct s_map
 	int			exit_x;
 	int			exit_y;
 }	t_map;
+
+typedef struct s_map_error
+{
+	int			borders;
+	int			rectangle;
+	int			p_count;
+	int			e_count;
+	int			c_count;
+	int			wrong_sign;
+	int			shut_down;
+}	t_error;
 
 typedef struct s_player
 {
@@ -77,6 +94,7 @@ typedef struct s_game
 	t_player	figur;
 	t_img		world;
 	t_map		map;
+	t_error		err;
 }	t_game;
 
 // initalize
@@ -85,7 +103,18 @@ void	init_player(t_game *max);
 void	init_window(t_game *max);
 void	init_map(t_game *max, char **argv);
 void	init_images(t_game *max);
+void	init_errors(t_game *max);
 void	set_map(t_game *max);
+
+// errors
+void	check_errors(t_game *max);
+void	parse_signs(t_game *max);
+void	print_error(char *str, t_game *max);
+void	parse_borders(t_game *max);
+size_t	ft_strlen(const char *str);
+char	*ft_strchr(const char *str, int c);
+void	ft_putstr_fd(char const *s, int fd);
+void	print_error(char *str, t_game *max);
 
 // moves
 void	direction(int key, t_game *max);
