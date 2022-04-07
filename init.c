@@ -22,6 +22,7 @@ void	init(t_game *max, char **argv)
 	init_map(max, argv);
 	init_window(max);
 	init_errors(max);
+	max->win = mlx_new_window(max->mlx, max->win_width, max->win_height, "Spielewiese");
 }
 
 void	init_player(t_game *max)

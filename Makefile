@@ -17,6 +17,7 @@ SRC		=	max_the_game.c \
 			deal_key.c \
 			init_map.c \
 			init.c \
+			check_args.c \
 			check_map.c \
 			set_map.c \
 			move_dependences.c \

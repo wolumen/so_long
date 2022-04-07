@@ -115,6 +115,8 @@ size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
 void	ft_putstr_fd(char const *s, int fd);
 void	print_error(char *str, t_game *max);
+void	check_args(t_game *max, int argc, char **argv);
+int		ft_strrncmp(const char *s1, const char *s2, size_t n);
 
 // moves
 void	direction(int key, t_game *max);
