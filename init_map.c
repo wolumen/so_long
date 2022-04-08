@@ -26,23 +26,21 @@ void	init_map(t_game *max, char **argv)
 	file = open_file(max, argv);
 	fill_array(max, file);
 	close(file);
-	printf("in ini_map, shut.down: %d\n", max->err.shut_down);
-
 	// int i, j;
 	// for (i = 0; i < max->map.rows; i++) 
 	// 	{
 	// 	for (j = 0; j < max->map.cols; j++) 
-	// 		printf("%c ", max->map.map_arr[i][j]);
+	// 		printf("%c ", max->map.arr[i][j]);
 	// 	printf("\n");
 	// }
 }
 
 void	init_exit(t_game *max, int i, int j)
 {
-	max->map.collectible_count = 0;
-	max->figur.collectible_found = 0;
-	max->map.exit_x = j * max->world.world_height;
-	max->map.exit_y = i * max->world.world_width;
+	max->map.c_amount = 0;
+	max->figur.c_found = 0;
+	max->map.exit_x = (max->world.width * j);
+	max->map.exit_y = (max->world.height * i);
 }
 
 void	fill_array(t_game *max, int file)
@@ -57,7 +55,7 @@ void	fill_array(t_game *max, int file)
 	{	
 		if (sign != '\n')
 		{	
-			max->map.map_arr[i][j] = sign;
+			max->map.arr[i][j] = sign;
 			if (sign == EXIT)
 				init_exit(max, i, j);
 			j++;
@@ -75,14 +73,14 @@ void	allocate_array(t_game *max)
 {
 	int	i;
 
-	max->map.map_arr = malloc(sizeof(char *) * max->map.rows);
-	if (!max->map.map_arr)
+	max->map.arr = malloc(sizeof(char *) * max->map.rows);
+	if (!max->map.arr)
 		exit (-1);
 	i = 0;
 	while (i < max->map.rows)
 	{
-		max->map.map_arr[i] = malloc((sizeof(char) * max->map.cols) + 1);			// STEFFEN +1 für \n am Ende jeder Zeile´???
-		if (!max->map.map_arr[i])
+		max->map.arr[i] = malloc((sizeof(char) * max->map.cols) + 1);			// STEFFEN +1 für \n am Ende jeder Zeile´???
+		if (!max->map.arr[i])
 			exit (-1);
 		i++;
 	}
@@ -93,14 +91,14 @@ void	get_rows_n_cols(t_game *max, int file)
 	char	sign;
 	int		xmax;
 
+	xmax = 0;
 	max->map.rows = 1;
 	max->map.cols = -1;													// STEFFEN warum bei -1 starten? 
-
 	while (read(file, &sign, sizeof(sign)))
 	{
 		if (sign != '\n')
 		{
-			max->map.cols += 1;
+			max->map.cols++;
 			if (max->map.rows == 1)
 				xmax = max->map.cols;
 		}
@@ -108,7 +106,7 @@ void	get_rows_n_cols(t_game *max, int file)
 		{
 			if (max->map.cols != xmax)
 				print_error("Map is not rectangle\n", max);
-			max->map.rows += 1;
+			max->map.rows++;
 			max->map.cols = -1;
 		}
 	}

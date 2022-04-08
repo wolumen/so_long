@@ -20,10 +20,8 @@ char	current_field(t_game *max)
 
 	m = max->figur.y / max->figur.img_width;
 	n = max->figur.x / max->figur.img_height;
-	field = max->map.map_arr[m][n];
-	
-	// printf("current field: %c\n", max->map.map_arr[m][n]);
-
+	field = max->map.arr[m][n];
+	// printf("current field: %c\n", max->map.arr[m][n]);
 	return (field);
 }
 
@@ -43,39 +41,41 @@ char	next_field(int key, t_game *max)
 		n = n + 1;
 	if (key == KEY_A)
 		n = n - 1;
-	field = max->map.map_arr[m][n];
-	
-	// printf("next field: %c\n", max->map.map_arr[m][n]);
-
+	field = max->map.arr[m][n];
+	// printf("next field: %c\n", max->map.arr[m][n]);
 	return (field);
 }
 
-void collect_collectible(t_game *max)
+void	collect_collectible(t_game *max)
 {
 	int	m;
-	int n;
+	int	n;
 
 	m = max->figur.y / max->figur.img_width;
 	n = max->figur.x / max->figur.img_height;
-	max->map.map_arr[m][n] = '0';
-	max->figur.collectible_found += 1;
-
-	if (max->figur.collectible_found == max->map.collectible_count)
+	max->map.arr[m][n] = '0';
+	max->figur.c_found += 1;
+	if (max->figur.c_found == max->map.c_amount)
 	{
-		mlx_put_image_to_window(max->mlx, max->win, max->world.exit, max->map.exit_x, max->map.exit_y);
+		write(2, YEL, ft_strlen(YEL));
+		ft_putstr_fd("You ate all the carrots! ", 1);
+		ft_putstr_fd("Now find your rabbit hole.\n", 1);
+		write(2, WHITE, ft_strlen(WHITE));
+		mlx_put_image_to_window(max->mlx, max->win, max->world.exit, \
+			max->map.exit_x, max->map.exit_y);
 	}
-	// printf("carrot found: %d\n", max->figur.collectible_found);
-	// printf("carrot count: %d\n", max->map.collectible_count);
+	// printf("carrot found: %d\n", max->figur.c_found);
+	// printf("carrot count: %d\n", max->map.c_amount);
 }
 
 void	win(t_game *max)
 {
-	if (max->figur.collectible_found >= max->map.collectible_count)
+	if (max->figur.c_found >= max->map.c_amount)
 	{
 		if (max->figur.x == max->map.exit_x && max->figur.y == max->map.exit_y)
 		{
 			write(2, YEL, ft_strlen(YEL));
-			ft_putstr_fd("You ate all the carrots!\n", 1);
+			ft_putstr_fd("Happy Rabbit!\n", 1);
 			write(2, WHITE, ft_strlen(WHITE));
 			ft_exit(max);
 		}

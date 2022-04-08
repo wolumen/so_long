@@ -24,7 +24,7 @@ void	print_error(char *str, t_game *max)
 
 int	open_file(t_game *max, char **argv)
 {
-	int file;
+	int	file;
 
 	file = open(argv[1], O_RDONLY);
 	if (file == -1)
@@ -33,4 +33,12 @@ int	open_file(t_game *max, char **argv)
 		exit (-1);
 	}
 	return (file);
+}
+
+void	display_steps(t_game *max)
+{
+	max->figur.steps += 1;
+	write(1, "moves: ", 7);
+	ft_putnbr_fd(max->figur.steps, 1);
+	write(1, "\n", 1);
 }

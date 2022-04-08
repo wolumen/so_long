@@ -14,8 +14,7 @@
 
 void	check_args(t_game *max, int argc, char **argv)
 {	
-	int file;
-
+	int	file;
 
 	if (argc < 2)
 	{	

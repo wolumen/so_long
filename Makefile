@@ -20,8 +20,8 @@ SRC		=	max_the_game.c 		\
 			check_args.c		\
 			check_map.c			\
 			set_map.c			\
+			directions.c		\
 			move_dependences.c	\
-			display_steps.c		\
 			exit.c				\
 			utils.c
 
@@ -66,16 +66,16 @@ fclean: clean
 re: fclean all
 
 test1: all
-	./$(NAME) ./maps/map1.ber
+	./$(NAME) ./maps/map#1.ber
 
 test2: all
-	./$(NAME) ./maps/map2.ber
+	./$(NAME) ./maps/map#2.ber
 
 test3: all
-	./$(NAME) ./maps/map_large.ber
+	./$(NAME) ./maps/map#3.ber
 
 memcheck1: all
-	$(VAL) $(VAL_FLAGS) ./$(NAME) maps/map1.ber
+	$(VAL) $(VAL_FLAGS) ./$(NAME) maps/map#1.ber
 
 memcheck2: all
-	$(VAL) $(VAL_FLAGS) ./$(NAME) maps/map2.ber
+	$(VAL) $(VAL_FLAGS) ./$(NAME) maps/map#2.ber

@@ -26,15 +26,12 @@
 # define KEY_ESC		65307
 
 # define WALL			'1'
-# define BACKGROUND		'0'
-# define COLLECTIBLE	'C'
+# define BKG			'0'
+# define COLL			'C'
 # define PLAYER			'P'
 # define EXIT			'E'
 
 # define SIGNS			"10CPE"
-
-# define TRUE			1
-# define FALSE			0
 
 # define WHITE			"\033[0m"
 # define RED			"\033[31m"
@@ -42,10 +39,10 @@
 
 typedef struct s_map
 {
-	char		**map_arr;
+	char		**arr;
 	int			rows;
 	int			cols;
-	int			collectible_count;
+	int			c_amount;
 	int			exit_x;
 	int			exit_y;
 }	t_map;
@@ -72,17 +69,17 @@ typedef struct s_player
 	int			img_width;
 	int			img_height;
 	int			steps;
-	int			collectible_found;
+	int			c_found;
 }	t_player;
 
 typedef struct s_img
 {
-	void		*background;
+	void		*bkg;
 	void		*wall;
-	void		*collectible;
+	void		*coll;
 	void		*exit;
-	int			world_width;
-	int			world_height;
+	int			width;
+	int			height;
 }	t_img;
 
 typedef struct s_game
@@ -112,21 +109,27 @@ void	get_rows_n_cols(t_game *max, int file);
 void	allocate_array(t_game *max);
 void	fill_array(t_game *max, int file);
 void	set_map(t_game *max);
+void	put_collectibles(t_game *max, int i, int j);
+void	put_walls(t_game *max, int i, int j);
+void	put_player(t_game *max, int i, int j);
 
 // errors
 void	check_errors(t_game *max);
 void	parse_signs(t_game *max);
 void	print_error(char *str, t_game *max);
 void	parse_borders(t_game *max);
+void	check_args(t_game *max, int argc, char **argv);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
 void	ft_putstr_fd(char const *s, int fd);
-void	check_args(t_game *max, int argc, char **argv);
 int		ft_strrncmp(const char *s1, const char *s2, size_t n);
 
 // moves
-void	direction(int key, t_game *max);
 void	move(int key, t_game *max);
+void	direction_up(t_game *max);
+void	direction_left(t_game *max);
+void	direction_down(t_game *max);
+void	direction_right(t_game *max);
 char	next_field(int key, t_game *max);
 char	current_field(t_game *max);
 int		next_field_wall(int key, t_game *max);
@@ -137,7 +140,7 @@ void	win(t_game *max);
 
 // hooks
 int		deal_key(int key, void *param);
-int		deal_mouse(int button,int x,int y,void *param);
+int		deal_mouse(int button, int x, int y, void *param);
 
 // clean up
 int		ft_exit(t_game *max);

@@ -14,7 +14,7 @@
 
 int	ft_exit(t_game *max)
 {
-	if (max->map.map_arr)
+	if (max->map.arr)
 		free_map_array(max);
 	if (max->win)
 		mlx_destroy_window(max->mlx, max->win);
@@ -37,12 +37,12 @@ void	free_map_array(t_game *max)
 	i = 0;
 	while (i < max->map.rows)
 	{
-		if (max->map.map_arr[i])
-			free(max->map.map_arr[i]);
+		if (max->map.arr[i])
+			free(max->map.arr[i]);
 		i++;
 	}
-	if (max->map.map_arr)
-		free(max->map.map_arr);
+	if (max->map.arr)
+		free(max->map.arr);
 }
 
 void	free_images(t_game *max)
@@ -57,10 +57,10 @@ void	free_images(t_game *max)
 		mlx_destroy_image(max->mlx, max->figur.img_r);
 	if (max->world.wall)
 		mlx_destroy_image(max->mlx, max->world.wall);
-	if (max->world.background)
-		mlx_destroy_image(max->mlx, max->world.background);
-	if (max->world.collectible)
-		mlx_destroy_image(max->mlx, max->world.collectible);
+	if (max->world.bkg)
+		mlx_destroy_image(max->mlx, max->world.bkg);
+	if (max->world.coll)
+		mlx_destroy_image(max->mlx, max->world.coll);
 	if (max->world.exit)
 		mlx_destroy_image(max->mlx, max->world.exit);
 }
