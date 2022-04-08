@@ -64,19 +64,8 @@ void collect_collectible(t_game *max)
 	{
 		mlx_put_image_to_window(max->mlx, max->win, max->world.exit, max->map.exit_x, max->map.exit_y);
 	}
-	printf("carrot found: %d\n", max->figur.collectible_found);
-	printf("carrot count: %d\n", max->map.collectible_count);
-}
-
-int	next_field_wall(int key, t_game *max)
-{
-	char	field;
-
-	field = next_field(key, max);
-	if (field == WALL)
-		return (TRUE);
-	else
-		return (FALSE);
+	// printf("carrot found: %d\n", max->figur.collectible_found);
+	// printf("carrot count: %d\n", max->map.collectible_count);
 }
 
 void	win(t_game *max)
@@ -85,7 +74,9 @@ void	win(t_game *max)
 	{
 		if (max->figur.x == max->map.exit_x && max->figur.y == max->map.exit_y)
 		{
-			write(1, "YOU WON!\n", 9);
+			write(2, YEL, ft_strlen(YEL));
+			ft_putstr_fd("You ate all the carrots!\n", 1);
+			write(2, WHITE, ft_strlen(WHITE));
 			ft_exit(max);
 		}
 	}

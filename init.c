@@ -22,14 +22,14 @@ void	init(t_game *max, char **argv)
 	init_map(max, argv);
 	init_window(max);
 	init_errors(max);
-	max->win = mlx_new_window(max->mlx, max->win_width, max->win_height, "Spielewiese");
+	max->win = mlx_new_window(max->mlx, max->win_width, max->win_height, "Playground");
 }
 
 void	init_player(t_game *max)
 {
-	max->figur.steps = 0;
-	max->figur.x = 0;
-	max->figur.y = 0;
+	max->figur.steps =	0;
+	max->figur.x = 		0;
+	max->figur.y = 		0;
 }
 
 void	init_images(t_game *max)
@@ -52,11 +52,10 @@ void	init_window(t_game *max)
 
 void	init_errors(t_game *max)
 {
-	max->err.borders = 0;
-	max->err.rectangle = 0;
-	max->err.c_count = 0;
-	max->err.e_count = 0;
-	max->err.p_count = 0;
-	max->err.wrong_sign = 0;
-	max->err.shut_down = 0;
+	max->err.borders =	 	0;
+	max->err.rectangle = 	0;
+	max->err.c_count =	 	0;
+	max->err.e_count =	 	0;
+	max->err.p_count =	 	0;
+	max->err.wrong_sign = 	0;
 }

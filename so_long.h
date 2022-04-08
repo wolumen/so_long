@@ -100,10 +100,17 @@ typedef struct s_game
 // initalize
 void	init(t_game *max, char **argv);
 void	init_player(t_game *max);
+void	init_exit(t_game *max, int i, int j);
 void	init_window(t_game *max);
 void	init_map(t_game *max, char **argv);
 void	init_images(t_game *max);
 void	init_errors(t_game *max);
+
+// map
+int		open_file(t_game *max, char **argv);
+void	get_rows_n_cols(t_game *max, int file);
+void	allocate_array(t_game *max);
+void	fill_array(t_game *max, int file);
 void	set_map(t_game *max);
 
 // errors
@@ -114,7 +121,6 @@ void	parse_borders(t_game *max);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
 void	ft_putstr_fd(char const *s, int fd);
-void	print_error(char *str, t_game *max);
 void	check_args(t_game *max, int argc, char **argv);
 int		ft_strrncmp(const char *s1, const char *s2, size_t n);
 
@@ -137,6 +143,5 @@ int		deal_mouse(int button,int x,int y,void *param);
 int		ft_exit(t_game *max);
 void	free_map_array(t_game *max);
 void	free_images(t_game *max);
-
 
 #endif

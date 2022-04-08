@@ -16,6 +16,27 @@
 #include <stdlib.h>			// exit
 #include <fcntl.h>			// für open
 
+void	init_map(t_game *max, char **argv)
+{
+	int	file;
+
+	file = open_file(max, argv);
+	get_rows_n_cols(max, file);
+	allocate_array(max);
+	file = open_file(max, argv);
+	fill_array(max, file);
+	close(file);
+	printf("in ini_map, shut.down: %d\n", max->err.shut_down);
+
+	// int i, j;
+	// for (i = 0; i < max->map.rows; i++) 
+	// 	{
+	// 	for (j = 0; j < max->map.cols; j++) 
+	// 		printf("%c ", max->map.map_arr[i][j]);
+	// 	printf("\n");
+	// }
+}
+
 void	init_exit(t_game *max, int i, int j)
 {
 	max->map.collectible_count = 0;
@@ -24,17 +45,15 @@ void	init_exit(t_game *max, int i, int j)
 	max->map.exit_y = i * max->world.world_width;
 }
 
-void	fill_array(int file, t_game *max)
+void	fill_array(t_game *max, int file)
 {
 	char	sign;
-	int		bytes;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	bytes = read(file, &sign, sizeof(sign));
-	while (bytes > 0)
+	while (read(file, &sign, sizeof(sign)))
 	{	
 		if (sign != '\n')
 		{	
@@ -48,8 +67,8 @@ void	fill_array(int file, t_game *max)
 			i++;
 			j = 0;
 		}
-		bytes = read(file, &sign, sizeof(sign));
 	}
+	close(file);
 }
 
 void	allocate_array(t_game *max)
@@ -69,51 +88,31 @@ void	allocate_array(t_game *max)
 	}
 }
 
-void	get_rows_n_cols(t_game *max, char **argv)
+void	get_rows_n_cols(t_game *max, int file)
 {
-	int		bytes;
 	char	sign;
-	int		file;
+	int		xmax;
 
 	max->map.rows = 1;
-	max->map.cols = 1;
+	max->map.cols = -1;													// STEFFEN warum bei -1 starten? 
 
-	file = open(argv[1], O_RDONLY);
-	if (file == -1)
-		exit (-1);
-	bytes = read(file, &sign, sizeof(sign));
-	while (bytes > 0)
+	while (read(file, &sign, sizeof(sign)))
 	{
-		if (sign == '\n')
+		if (sign != '\n')
+		{
+			max->map.cols += 1;
+			if (max->map.rows == 1)
+				xmax = max->map.cols;
+		}
+		else
+		{
+			if (max->map.cols != xmax)
+				print_error("Map is not rectangle\n", max);
 			max->map.rows += 1;
-		max->map.cols += 1;
-		bytes = read(file, &sign, sizeof(sign));
+			max->map.cols = -1;
+		}
 	}
-	max->map.cols = (max->map.cols - max->map.rows) / max->map.rows;
+	max->map.cols = xmax;
 	printf("rows: %d\ncols: %d\n", max->map.rows, max->map.cols);
-
 	close(file);
-}
-
-void	init_map(t_game *max, char **argv)
-{
-	int	file;
-
-	get_rows_n_cols(max, argv);
-
-	allocate_array(max);
-
-	file = open(argv[1], O_RDONLY);										// STEFFEN open eigentlich in fill_array function rein aber >25 Zeilen :(
-	if (file == -1)
-		exit (-1);
-	fill_array(file, max);
-	close(file);
-
-	// int i, j;
-	// for (i = 0; i < max->map.rows; i++) 
-	// 	{
-	// 	for (j = 0; j < max->map.cols; j++) 
-	// 		printf("%c ", max->map.map_arr[i][j]);
-	// 	printf("\n");
-	// }
 }

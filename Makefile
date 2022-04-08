@@ -13,16 +13,17 @@
 NAME	=	so_long
 
 			
-SRC		=	max_the_game.c \
-			deal_key.c \
-			init_map.c \
-			init.c \
-			check_args.c \
-			check_map.c \
-			set_map.c \
-			move_dependences.c \
-			display_steps.c \
-			exit.c 
+SRC		=	max_the_game.c 		\
+			deal_key.c			\
+			init_map.c			\
+			init.c				\
+			check_args.c		\
+			check_map.c			\
+			set_map.c			\
+			move_dependences.c	\
+			display_steps.c		\
+			exit.c				\
+			utils.c
 
 OBJ		=	$(SRC:%.c=%.o)
 
@@ -60,6 +61,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME) $(libft) $(libmlx)
+	rm -f ./libft/$(libft)
 
 re: fclean all
 
@@ -73,7 +75,7 @@ test3: all
 	./$(NAME) ./maps/map_large.ber
 
 memcheck1: all
-	$(VAL) $(VAL_FLAGS) ./$(NAME) ./maps/map1.ber
+	$(VAL) $(VAL_FLAGS) ./$(NAME) maps/map1.ber
 
 memcheck2: all
-	$(VAL) $(VAL_FLAGS) ./$(NAME) ./maps/map2.ber
+	$(VAL) $(VAL_FLAGS) ./$(NAME) maps/map2.ber

@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 {
 	t_game	max;												// die erste t_game Variable darf kein Pointer sein (no *max)
 
+	max.err.shut_down = 0;
 	check_args(&max, argc, argv);
 	init(&max, argv);
 	check_errors(&max);

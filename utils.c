@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpreissn <jpreissn@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 21:09:21 by jpreissn          #+#    #+#             */
-/*   Updated: 2022/04/07 21:09:21 by jpreissn         ###   ########.fr       */
+/*   Created: 2022/04/08 15:19:59 by jpreissn          #+#    #+#             */
+/*   Updated: 2022/04/08 15:19:59 by jpreissn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_args(t_game *max, int argc, char **argv)
-{	
+void	print_error(char *str, t_game *max)
+{
+	write(2, RED, ft_strlen(RED));
+	write(2, "Error\n", 6);
+	write(2, YEL, ft_strlen(YEL));
+	ft_putstr_fd(str, 2);
+	write(2, WHITE, ft_strlen(WHITE));
+	max->err.shut_down++;
+}
+
+int	open_file(t_game *max, char **argv)
+{
 	int file;
 
-
-	if (argc < 2)
-	{	
-		print_error("to view arguments\n", max);
-		ft_putstr_fd("Usage: ./so_long maps/<map.ber>\n", 2);
-	}
-	if (ft_strrncmp(argv[1], ".ber", 4))
-		print_error("map: wrong extension, use .ber\n", max);
 	file = open(argv[1], O_RDONLY);
 	if (file == -1)
 	{	
 		print_error("map could not be opened\n", max);
 		exit (-1);
 	}
+	return (file);
 }

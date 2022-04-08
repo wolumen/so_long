@@ -32,6 +32,7 @@ void	check_errors(t_game *max)
 		print_error("Map must be surrounded by walls\n", max);
 	if (max->err.wrong_sign > 0)
 		print_error("Unknown element on the map\n", max);
+	printf("in check_errors, shut.down: %d\n", max->err.shut_down);
 	if (max->err.shut_down > 0)
 		ft_exit(max);
 }
@@ -55,7 +56,7 @@ void	parse_signs(t_game *max)
 				max->err.e_count++;
 			if (sign[i][j] == COLLECTIBLE)
 				max->err.c_count++;
-			if (ft_strchr(SIGNS, sign[i][j]) == NULL)
+			if (ft_strchr(SIGNS, sign[i][j]) == NULL)					// strchr returns NULL if the character is not found.
 				max->err.wrong_sign++;
 			j++;
 		}
@@ -84,14 +85,4 @@ void	parse_borders(t_game *max)
 			max->err.borders++;
 		i++;
 	}
-}
-
-void	print_error(char *str, t_game *max)
-{
-	write(2, RED, ft_strlen(RED));
-	write(2, "Error\n", 6);
-	write(2, YEL, ft_strlen(YEL));
-	ft_putstr_fd(str, 2);
-	write(2, WHITE, ft_strlen(WHITE));
-	max->err.shut_down++;
 }

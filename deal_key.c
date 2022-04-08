@@ -17,7 +17,7 @@ int	deal_key(int key, void *param)
 	t_game	*max;
 
 	max = (t_game *)param;
-	if (next_field_wall(key, max) == FALSE)
+	if (next_field(key, max) != WALL)
 		move(key, max);
 	if (key == KEY_ESC)
 		ft_exit(max);
@@ -27,7 +27,7 @@ int	deal_key(int key, void *param)
 void	move(int key, t_game *max)
 {
 	direction(key, max);
-	if (current_field(max) == 'C')
+	if (current_field(max) == COLLECTIBLE)
 		collect_collectible(max);
 	win(max);
 }
