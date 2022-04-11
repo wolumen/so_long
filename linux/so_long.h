@@ -1,0 +1,151 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpreissn <jpreissn@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/06 11:27:47 by jpreissn          #+#    #+#             */
+/*   Updated: 2022/04/06 11:27:47 by jpreissn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SO_LONG_H
+# define SO_LONG_H
+
+# include <mlx.h>
+# include <stdio.h>			// printf
+# include <unistd.h>
+# include <stdlib.h>		// exit
+# include <fcntl.h>			// für open
+
+# define KEY_W			119
+# define KEY_S			115
+# define KEY_A			97
+# define KEY_D			100
+# define KEY_ESC		65307
+
+# define WALL			'1'
+# define BKG			'0'
+# define COLL			'C'
+# define PLAYER			'P'
+# define EXIT			'E'
+
+# define SIGNS			"10CPE"
+
+# define WHITE			"\033[0m"
+# define RED			"\033[31m"
+# define YEL			"\x1B[33m"
+
+typedef struct s_map
+{
+	char		**arr;
+	int			rows;
+	int			cols;
+	int			c_amount;
+	int			exit_x;
+	int			exit_y;
+}	t_map;
+
+typedef struct s_map_error
+{
+	int			borders;
+	int			rectangle;
+	int			p_count;
+	int			e_count;
+	int			c_count;
+	int			wrong_sign;
+	int			shut_down;
+}	t_error;
+
+typedef struct s_player
+{
+	void		*img_d;
+	void		*img_u;
+	void		*img_l;
+	void		*img_r;
+	int			x;
+	int			y;
+	int			img_width;
+	int			img_height;
+	int			steps;
+	int			c_found;
+}	t_player;
+
+typedef struct s_img
+{
+	void		*bkg;
+	void		*wall;
+	void		*coll;
+	void		*exit;
+	int			width;
+	int			height;
+}	t_img;
+
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	int			win_width;
+	int			win_height;
+	t_player	figur;
+	t_img		world;
+	t_map		map;
+	t_error		err;
+}	t_game;
+
+// initalize
+void	init(t_game *max, char **argv);
+void	init_player(t_game *max);
+void	init_exit(t_game *max, int i, int j);
+void	init_window(t_game *max);
+void	init_map(t_game *max, char **argv);
+void	init_images(t_game *max);
+void	init_errors(t_game *max);
+void	instructions(void);
+
+// map
+int		open_file(t_game *max, char **argv);
+void	get_rows_n_cols(t_game *max, int file);
+void	allocate_array(t_game *max);
+void	fill_array(t_game *max, int file);
+void	set_map(t_game *max);
+void	put_collectibles(t_game *max, int i, int j);
+void	put_walls(t_game *max, int i, int j);
+void	put_player(t_game *max, int i, int j);
+
+// errors
+void	check_errors(t_game *max);
+void	parse_signs(t_game *max);
+void	print_error(char *str, t_game *max);
+void	parse_borders(t_game *max);
+void	check_args(t_game *max, int argc, char **argv);
+size_t	ft_strlen(const char *str);
+char	*ft_strchr(const char *str, int c);
+void	ft_putstr_fd(char const *s, int fd);
+int		ft_strrncmp(const char *s1, const char *s2, size_t n);
+
+// moves
+void	move(int key, t_game *max);
+void	direction_up(t_game *max);
+void	direction_left(t_game *max);
+void	direction_down(t_game *max);
+void	direction_right(t_game *max);
+char	next_field(int key, t_game *max);
+char	current_field(t_game *max);
+int		next_field_wall(int key, t_game *max);
+void	collect_collectible(t_game *max);
+void	display_steps(t_game *max);
+void	ft_putnbr_fd(int n, int fd);
+void	win(t_game *max);
+
+// hooks
+int		deal_key(int key, void *param);
+int		deal_mouse(int button, int x, int y, void *param);
+
+// clean up
+int		ft_exit(t_game *max);
+void	free_map_array(t_game *max);
+void	free_images(t_game *max);
+
+#endif
