@@ -79,7 +79,7 @@ void	allocate_array(t_game *max)
 	i = 0;
 	while (i < max->map.rows)
 	{
-		max->map.arr[i] = malloc((sizeof(char) * max->map.cols) + 1);			// STEFFEN +1 für \n am Ende jeder Zeile´???
+		max->map.arr[i] = malloc((sizeof(char) * max->map.cols) + 1);
 		if (!max->map.arr[i])
 			exit (-1);
 		i++;
@@ -93,7 +93,7 @@ void	get_rows_n_cols(t_game *max, int file)
 
 	xmax = 0;
 	max->map.rows = 1;
-	max->map.cols = -1;													// STEFFEN warum bei -1 starten? 
+	max->map.cols = -1;
 	while (read(file, &sign, sizeof(sign)))
 	{
 		if (sign != '\n')

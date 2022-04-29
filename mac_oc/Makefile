@@ -11,7 +11,6 @@
 # **************************************************************************** #
 
 NAME	=	so_long
-
 			
 SRC		=	main.c 		\
 			deal_key.c			\
@@ -33,10 +32,10 @@ libmlx	=	libmlx.a
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -g
 
-MLX_FLAGS =	-lX11 -lXext -lm
+MLX_FLAGS =	-lm -lz -framework OpenGL -framework AppKit
 
-VAL			:= valgrind
-VAL_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes -s --log-file=valgrind-out.txt
+VAL		= 	leaks --atExit  -- 
+
 
 ARG1	=	./maps/map1.ber
 ARG2	=	./maps/map2.ber
@@ -44,6 +43,9 @@ ARG3	=	./maps/map3.ber
 
 
 all: $(NAME)
+
+# %.o: %.c
+# 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 $(NAME):  $(libft) $(libmlx) $(OBJ)
 	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(libft) $(libmlx) $(MLX_FLAGS)
@@ -53,8 +55,8 @@ libft.a:
 	cp ./libft/libft.a ./
 
 libmlx.a:
-	$(MAKE) -sC ./mlx-linux
-	cp ./mlx-linux/libmlx.a ./
+	$(MAKE) -sC ./mlx
+	cp ./mlx/libmlx.a ./
 
 clean:
 	$(MAKE) clean -C ./libft
@@ -62,7 +64,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME) $(libft) $(libmlx)
-	rm -f ./libft/$(libft)
 
 re: fclean all
 
@@ -76,10 +77,11 @@ test3: all
 	./$(NAME) $(ARG3)
 
 memcheck1: all
-	$(VAL) $(VAL_FLAGS) ./$(NAME) $(ARG1)
-
+	$(VAL) ./$(NAME) $(ARG1)
+	
 memcheck2: all
-	$(VAL) $(VAL_FLAGS) ./$(NAME) $(ARG2)
+	$(VAL) ./$(NAME) $(ARG2)
+
 
 norminette:
 	norminette *.c so_long.h
