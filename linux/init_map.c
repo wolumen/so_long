@@ -22,6 +22,7 @@ void	init_map(t_game *max, char **argv)
 
 	file = open_file(max, argv);
 	get_rows_n_cols(max, file);
+	close(file);
 	allocate_array(max);
 	file = open_file(max, argv);
 	fill_array(max, file);
@@ -88,29 +89,49 @@ void	allocate_array(t_game *max)
 
 void	get_rows_n_cols(t_game *max, int file)
 {
-	char	sign;
-	int		xmax;
+	// char	sign;
+	// int		xmax;
 
-	xmax = 0;
-	max->map.rows = 1;
-	max->map.cols = -1;													// STEFFEN warum bei -1 starten? 
-	while (read(file, &sign, sizeof(sign)))
-	{
-		if (sign != '\n')
-		{
-			max->map.cols++;
-			if (max->map.rows == 1)
-				xmax = max->map.cols;
-		}
-		else
-		{
-			if (max->map.cols != xmax)
-				print_error("Map is not rectangle\n", max);
-			max->map.rows++;
-			max->map.cols = -1;
-		}
-	}
-	max->map.cols = xmax;
+	// xmax = 0;
+	// max->map.rows = 1;
+	// max->map.cols = -1;													// STEFFEN warum bei -1 starten? 
+	// while (read(file, &sign, sizeof(sign)))
+	// {
+	// 	if (sign != '\n')
+	// 	{
+	// 		max->map.cols++;
+	// 		if (max->map.rows == 1)
+	// 			xmax = max->map.cols;
+	// 	}
+	// 	else
+	// 	{
+	// 		if (max->map.cols != xmax)
+	// 			print_error("Map is not rectangle\n", max);
+	// 		max->map.rows++;
+	// 		max->map.cols = -1;
+	// 	}
+	// }
+	// max->map.cols = xmax;
 	// printf("rows: %d\ncols: %d\n", max->map.rows, max->map.cols);
-	close(file);
+
+	char	*line;
+	int		cols;
+
+	max->map.rows = 0;
+	line = get_next_line(file);
+	max->map.cols = ft_strlen(line) - 2;
+	while (line)
+	{
+		max->map.rows++;
+		if (line[ft_strlen(line) - 1] == '\n')
+			cols = ft_strlen(line) - 2;
+		else
+			cols = ft_strlen(line);
+		if (cols != max->map.cols)
+			print_error("Map is not rectangle\n", max);
+		printf("rows: %d\ncols: %d\n", max->map.rows, cols);
+		free(line);
+		line = get_next_line(file);
+	}
+	free(line);
 }
