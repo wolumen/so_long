@@ -20,10 +20,11 @@ all functions of the MiniLibX library
 self coded ft_printf
 ```
 
-## Mandatory Part
-### About the game
-##### Map
+## About the game
 
+The goal is for the player to collect all the collectibles on the map before going to an exit in the least possible number of steps.
+
+##### Map
 
 The executable ``so_long`` will receive a map as the only argument, and this map will have a ``.ber`` filetype.
 
@@ -34,8 +35,6 @@ The map must follow these rules:
 - The map must be closed, i.e. surrounded by walls
 
 If any of these checks fail, the game must end with ``Error\n`` followed by a custom message.
-
-The goal is for the player to collect all the collectibles on the map before going to an exit in the least possible number of steps.
 
 ##### Controls
 You can use ``WASD`` to move and close it with ``Esc``. You move one tile at a time.  After picking up all collectibles, the exits open and you may leave to see how many moves you’ve used to solve the map.
@@ -76,9 +75,12 @@ The make file has the following rules:
 | ``make map[1-3]`` | Doeas ``make`` and runs the game with the selected map. E.g. make map1. |
 | `` make play`` | Allows you to play some of the maps I designed in a defined succession. To play the next map just press ``esc``. |
 
+
 To play you can use some of the makefile rules, or execute the file so_long if it's been generated, passing the map you want to play as parameter.  ``./so_long mapFileToPlay.ber``, you can choose between 11 maps. For example:
+
 ```
  ./so_long maps/map8.ber
  ```
+ 
  
 ![Screenshot 2022-05-10_110753](https://user-images.githubusercontent.com/78870401/167614701-b2a4b58e-96d9-4172-9646-d1c5fc3c4445.png)
