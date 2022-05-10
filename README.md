@@ -64,7 +64,7 @@ sudo apt-get install gcc make xorg libxext-dev libbsd-dev
 
 ### Compiling
 #### Execute the game
-The make file has the following rules:
+The Makefile has the following rules:
 
 | Rule | Function |
 | - | - |
