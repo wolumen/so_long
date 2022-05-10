@@ -41,14 +41,6 @@ The goal is for the player to collect all the collectibles on the map before goi
 You can use ``WASD`` to move and close it with ``Esc``. You move one tile at a time.  After picking up all collectibles, the exits open and you may leave to see how many moves you’ve used to solve the map.
 
 
-
-## Objectives
-
-* C Basics
-* Libc
-* Static library generation
-
-
 ## Skills
 
 * Graphics
@@ -88,3 +80,7 @@ To play you can use some of the makefile rules, or execute the file so_long if i
 ```
  ./so_long maps/map8.ber
  ```
+ 
+ <p align="center">
+![Screenshot 2022-05-10_110753](https://user-images.githubusercontent.com/78870401/167614701-b2a4b58e-96d9-4172-9646-d1c5fc3c4445.png)
+</p>
