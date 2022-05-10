@@ -73,7 +73,6 @@ The make file has the following rules:
 | ``make fclean`` | Deletes the object files and the executable. |
 | ``make re`` | makes ``fclean`` and ``make`` again. |
 | ``make map[1-3]`` | Doeas ``make`` and runs the game with the selected map. E.g. `make map1`. |
-| `` make play`` | Allows you to play some of the maps I designed in a defined succession. To play the next map just press ``esc``. |
 
 
 To play you can use some of the makefile rules, or execute the file so_long if it's been generated, passing the map you want to play as parameter.  ``./so_long mapFileToPlay.ber``, you can choose between 11 maps. For example:
