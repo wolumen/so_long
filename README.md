@@ -1,4 +1,4 @@
-# ft_printf
+# so_long
 
 ## Description
 
@@ -81,6 +81,4 @@ To play you can use some of the makefile rules, or execute the file so_long if i
  ./so_long maps/map8.ber
  ```
  
- <p align="center">
 ![Screenshot 2022-05-10_110753](https://user-images.githubusercontent.com/78870401/167614701-b2a4b58e-96d9-4172-9646-d1c5fc3c4445.png)
-</p>
