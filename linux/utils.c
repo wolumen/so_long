@@ -47,6 +47,6 @@ void	instructions(void)
 {
 	ft_putstr_fd(YEL, 1);
 	ft_putstr_fd("You're hungry as hell for carrots,", 1);
-	ft_putstr_fd(" go get 'em.\n", 1);
+	ft_putstr_fd(" go get 'em all.\n", 1);
 	ft_putstr_fd(WHITE, 1);
 }

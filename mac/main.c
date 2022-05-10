@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// run with: gcc max_the_game.c libmlx.a -lX11 -lXext -lm && ./a.out
 #include "so_long.h"
 
 int	main(int argc, char **argv)
 {
 	t_game	max;
+
 	max.err.shut_down = 0;
 	check_args(&max, argc, argv);
 	init(&max, argv);

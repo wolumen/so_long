@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>			// printf
-#include <unistd.h>
-#include <stdlib.h>			// exit
-#include <fcntl.h>			// für open
 
 void	init_map(t_game *max, char **argv)
 {
@@ -22,18 +18,10 @@ void	init_map(t_game *max, char **argv)
 
 	file = open_file(max, argv);
 	get_rows_n_cols(max, file);
-	close(file);
 	allocate_array(max);
 	file = open_file(max, argv);
 	fill_array(max, file);
 	close(file);
-	// int i, j;
-	// for (i = 0; i < max->map.rows; i++) 
-	// 	{
-	// 	for (j = 0; j < max->map.cols; j++) 
-	// 		printf("%c ", max->map.arr[i][j]);
-	// 	printf("\n");
-	// }
 }
 
 void	init_exit(t_game *max, int i, int j)
@@ -80,7 +68,7 @@ void	allocate_array(t_game *max)
 	i = 0;
 	while (i < max->map.rows)
 	{
-		max->map.arr[i] = malloc((sizeof(char) * max->map.cols) + 1);			// STEFFEN +1 für \n am Ende jeder Zeile´???
+		max->map.arr[i] = malloc((sizeof(char) * max->map.cols) + 1);
 		if (!max->map.arr[i])
 			exit (-1);
 		i++;
@@ -89,49 +77,28 @@ void	allocate_array(t_game *max)
 
 void	get_rows_n_cols(t_game *max, int file)
 {
-	// char	sign;
-	// int		xmax;
+	char	sign;
+	int		xmax;
 
-	// xmax = 0;
-	// max->map.rows = 1;
-	// max->map.cols = -1;													// STEFFEN warum bei -1 starten? 
-	// while (read(file, &sign, sizeof(sign)))
-	// {
-	// 	if (sign != '\n')
-	// 	{
-	// 		max->map.cols++;
-	// 		if (max->map.rows == 1)
-	// 			xmax = max->map.cols;
-	// 	}
-	// 	else
-	// 	{
-	// 		if (max->map.cols != xmax)
-	// 			print_error("Map is not rectangle\n", max);
-	// 		max->map.rows++;
-	// 		max->map.cols = -1;
-	// 	}
-	// }
-	// max->map.cols = xmax;
-	// printf("rows: %d\ncols: %d\n", max->map.rows, max->map.cols);
-
-	char	*line;
-	int		cols;
-
-	max->map.rows = 0;
-	line = get_next_line(file);
-	max->map.cols = ft_strlen(line) - 2;
-	while (line)
+	xmax = 0;
+	max->map.rows = 1;
+	max->map.cols = -1;
+	while (read(file, &sign, sizeof(sign)))
 	{
-		max->map.rows++;
-		if (line[ft_strlen(line) - 1] == '\n')
-			cols = ft_strlen(line) - 2;
+		if (sign != '\n')
+		{
+			max->map.cols++;
+			if (max->map.rows == 1)
+				xmax = max->map.cols;
+		}
 		else
-			cols = ft_strlen(line);
-		if (cols != max->map.cols)
-			print_error("Map is not rectangle\n", max);
-		printf("rows: %d\ncols: %d\n", max->map.rows, cols);
-		free(line);
-		line = get_next_line(file);
+		{
+			if (max->map.cols != xmax)
+				print_error("Map is not rectangle\n", max);
+			max->map.rows++;
+			max->map.cols = -1;
+		}
 	}
-	free(line);
+	max->map.cols = xmax;
+	close(file);
 }

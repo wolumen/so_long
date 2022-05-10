@@ -113,8 +113,6 @@ void	set_map(t_game *max);
 void	put_collectibles(t_game *max, int i, int j);
 void	put_walls(t_game *max, int i, int j);
 void	put_player(t_game *max, int i, int j);
-char	*get_next_line(int fd);
-size_t	ft_strlen(const char *str);
 
 // errors
 void	check_errors(t_game *max);

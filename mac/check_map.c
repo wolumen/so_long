@@ -55,7 +55,7 @@ void	parse_signs(t_game *max)
 				max->err.e_count++;
 			if (sign[i][j] == COLL)
 				max->err.c_count++;
-			if (ft_strchr(SIGNS, sign[i][j]) == NULL)					// strchr returns NULL if the character is not found.
+			if (ft_strchr(SIGNS, sign[i][j]) == NULL)
 				max->err.wrong_sign++;
 			j++;
 		}

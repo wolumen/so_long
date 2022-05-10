@@ -25,10 +25,14 @@ SRC		=	main.c 		\
 			exit.c				\
 			utils.c
 
-OBJ		=	$(SRC:%.c=%.o)
+OBJ		=	$(SRC:%.c=$O%.o)
+
+O		=	obj/
 
 libft	= 	libft.a
 libmlx	=	libmlx.a
+
+INC		=	-Imlx
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -g
@@ -36,7 +40,7 @@ CFLAGS	=	-Wall -Wextra -Werror -g
 MLX_FLAGS =	-lX11 -lXext -lm
 
 VAL			:= valgrind
-VAL_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes -s --log-file=valgrind-out.txt
+VAL_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt
 
 ARG1	=	./maps/map1.ber
 ARG2	=	./maps/map2.ber
@@ -45,20 +49,25 @@ ARG3	=	./maps/map3.ber
 
 all: $(NAME)
 
-$(NAME):  $(libft) $(libmlx) $(OBJ)
-	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(libft) $(libmlx) $(MLX_FLAGS)
+$(OBJ): $O%.o: %.c
+	@mkdir -p $O
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-libft.a:
+$(NAME):  $(libft) $(libmlx) $(OBJ)
+	$(CC) -o $(NAME) $(OBJ) $(INC) $(libft) $(libmlx) $(MLX_FLAGS)
+
+$(libft):
 	$(MAKE) bonus -sC ./libft
 	cp ./libft/libft.a ./
 
-libmlx.a:
-	$(MAKE) -sC ./mlx-linux
-	cp ./mlx-linux/libmlx.a ./
+$(libmlx):
+	$(MAKE) -sC ./mlx
+	cp ./mlx/libmlx.a ./
 
 clean:
 	$(MAKE) clean -C ./libft
 	rm -f $(OBJ)
+	rm -rf $O
 
 fclean: clean
 	rm -f $(NAME) $(libft) $(libmlx)
@@ -66,20 +75,17 @@ fclean: clean
 
 re: fclean all
 
-test1: all
+map1: re
 	./$(NAME) $(ARG1)
 	
-test2: all
+map2: re
 	./$(NAME) $(ARG2)
 
-test3: all
+map3: re
 	./$(NAME) $(ARG3)
 
-memcheck1: all
+memcheck1: re
 	$(VAL) $(VAL_FLAGS) ./$(NAME) $(ARG1)
-
-memcheck2: all
-	$(VAL) $(VAL_FLAGS) ./$(NAME) $(ARG2)
 
 norminette:
 	norminette *.c so_long.h

@@ -24,7 +24,9 @@ SRC		=	main.c 		\
 			exit.c				\
 			utils.c
 
-OBJ		=	$(SRC:%.c=%.o)
+OBJ		=	$(SRC:%.c=$O%.o)
+
+O		=	obj/
 
 libft	= 	libft.a
 libmlx	=	libmlx.a
@@ -32,10 +34,11 @@ libmlx	=	libmlx.a
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -g
 
-MLX_FLAGS =	-lm -lz -framework OpenGL -framework AppKit
+MLX_FLAGS =	-lm -lz -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-VAL		= 	leaks --atExit  -- 
+LEAKS	= 	leaks --atExit  -- 
 
+INC		=	-Imlx
 
 ARG1	=	./maps/map1.ber
 ARG2	=	./maps/map2.ber
@@ -44,11 +47,12 @@ ARG3	=	./maps/map3.ber
 
 all: $(NAME)
 
-# %.o: %.c
-# 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+$(OBJ): $O%.o: %.c
+	@mkdir -p $O
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME):  $(libft) $(libmlx) $(OBJ)
-	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(libft) $(libmlx) $(MLX_FLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(INC) $(libft) $(libmlx) $(MLX_FLAGS)
 
 libft.a:
 	$(MAKE) bonus -sC ./libft
@@ -61,27 +65,24 @@ libmlx.a:
 clean:
 	$(MAKE) clean -C ./libft
 	rm -f $(OBJ)
+	rm -rf $O
 
 fclean: clean
 	rm -f $(NAME) $(libft) $(libmlx)
 
 re: fclean all
 
-test1: all
+map1: all
 	./$(NAME) $(ARG1)
 	
-test2: all
+map2: all
 	./$(NAME) $(ARG2)
 
-test3: all
+map3: all
 	./$(NAME) $(ARG3)
 
 memcheck1: all
-	$(VAL) ./$(NAME) $(ARG1)
-	
-memcheck2: all
-	$(VAL) ./$(NAME) $(ARG2)
-
+	$(LEAKS) ./$(NAME) $(ARG1)
 
 norminette:
 	norminette *.c so_long.h

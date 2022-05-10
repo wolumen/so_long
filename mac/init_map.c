@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>			// printf
-#include <unistd.h>
-#include <stdlib.h>			// exit
-#include <fcntl.h>			// für open
 
 void	init_map(t_game *max, char **argv)
 {
@@ -26,13 +22,6 @@ void	init_map(t_game *max, char **argv)
 	file = open_file(max, argv);
 	fill_array(max, file);
 	close(file);
-	// int i, j;
-	// for (i = 0; i < max->map.rows; i++) 
-	// 	{
-	// 	for (j = 0; j < max->map.cols; j++) 
-	// 		printf("%c ", max->map.arr[i][j]);
-	// 	printf("\n");
-	// }
 }
 
 void	init_exit(t_game *max, int i, int j)
@@ -111,6 +100,5 @@ void	get_rows_n_cols(t_game *max, int file)
 		}
 	}
 	max->map.cols = xmax;
-	// printf("rows: %d\ncols: %d\n", max->map.rows, max->map.cols);
 	close(file);
 }

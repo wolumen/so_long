@@ -21,7 +21,6 @@ char	current_field(t_game *max)
 	m = max->figur.y / max->figur.img_width;
 	n = max->figur.x / max->figur.img_height;
 	field = max->map.arr[m][n];
-	// printf("current field: %c\n", max->map.arr[m][n]);
 	return (field);
 }
 
@@ -42,7 +41,6 @@ char	next_field(int key, t_game *max)
 	if (key == KEY_A)
 		n = n - 1;
 	field = max->map.arr[m][n];
-	// printf("next field: %c\n", max->map.arr[m][n]);
 	return (field);
 }
 
@@ -64,8 +62,6 @@ void	collect_collectible(t_game *max)
 		mlx_put_image_to_window(max->mlx, max->win, max->world.exit, \
 			max->map.exit_x, max->map.exit_y);
 	}
-	// printf("carrot found: %d\n", max->figur.c_found);
-	// printf("carrot count: %d\n", max->map.c_amount);
 }
 
 void	win(t_game *max)

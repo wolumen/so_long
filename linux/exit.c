@@ -19,10 +19,11 @@ int	ft_exit(t_game *max)
 	if (max->win)
 		mlx_destroy_window(max->mlx, max->win);
 	free_images(max);
-	// mlx_loop_end(max->mlx);
+	mlx_loop_end(max->mlx);
 	if (max->mlx)
 	{
-		mlx_destroy_display(max->mlx);						// STEFFEN destroy display nach destroy window? Was heißt das?
+		mlx_loop_end(max->mlx);
+		mlx_destroy_display(max->mlx);
 		free(max->mlx);
 	}
 	exit (EXIT_SUCCESS);
