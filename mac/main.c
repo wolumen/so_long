@@ -22,8 +22,8 @@ int	main(int argc, char **argv)
 	check_errors(&max);
 	set_map(&max);
 	instructions();
-	mlx_hook(max.win, 2, 1L << 0, deal_key, &max);
-	mlx_hook(max.win, 17, 1L << 2, ft_exit, &max);
+	mlx_hook(max.win, 2, 1, deal_key, &max);
+	mlx_hook(max.win, 17, 4, ft_exit, &max);
 	mlx_loop(max.mlx);
 	return (0);
 }
