@@ -18,6 +18,7 @@ void	init_map(t_game *max, char **argv)
 
 	file = open_file(max, argv);
 	get_rows_n_cols(max, file);
+	close(file);
 	allocate_array(max);
 	file = open_file(max, argv);
 	fill_array(max, file);
@@ -100,5 +101,4 @@ void	get_rows_n_cols(t_game *max, int file)
 		}
 	}
 	max->map.cols = xmax;
-	close(file);
 }
